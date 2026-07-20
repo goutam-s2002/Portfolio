@@ -27,9 +27,9 @@ const projects = [
    {
   id: 2, 
   title: "Banking System",
-  subtitle: "Full Stack",
+  subtitle: "Full Stack  Banking & Finance Platform",
   description:
-    "A comprehensive digital banking platform featuring secure JWT authentication, multi-account management, instant fund transfers, transaction histories, and dynamic statement exports.",
+    "A comprehensive digital banking platform featuring multi-account management, instant fund transfers, transaction histories, and dynamic statement exports.",
   techStack: [
     "React",
     "Spring Boot",
