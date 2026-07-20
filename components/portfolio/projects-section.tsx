@@ -24,8 +24,36 @@ const projects = [
     url: "https://github.com/goutam-s2002/FinanceBuddy",
     url2: "https://financebuddy-4i6l.onrender.com",
   },
+   {
+  id: 2, 
+  title: "Secure Digital Banking System",
+  subtitle: "Full Stack",
+  description:
+    "A comprehensive digital banking platform featuring secure JWT authentication, multi-account management, instant fund transfers, transaction histories, and dynamic statement exports.",
+  techStack: [
+    "React",
+    "Spring Boot",
+    "Spring Security",
+    "JWT",
+    "Spring Data JPA",
+    "MySQL",
+    "Bootstrap",
+    "Docker"
+  ],
+  features: [
+    "Secure JWT auth with silent access token refresh",
+    "Checking & Savings account management",
+    "Instant fund transfers, deposits & withdrawals",
+    "Full bank statements exportable to CSV, Excel, Word & PDF",
+    "Role-based access control (Admin & User portals) with audit logs",
+  ],
+  color: "bg-primary",
+  category: "Full Stack",
+  url: "https://github.com/goutam-s2002/Banking-System-Backend", 
+  url2: "https://bankingsystems.netlify.app" 
+
   {
-    id: 2,
+    id: 3,
     title: "Hostel Management System",
     subtitle: "Student & Fee Management",
     description:
@@ -42,6 +70,7 @@ const projects = [
     url: "https://github.com/goutam-s2002/Hostel-Management-System",
     url2: "https://github.com/goutam-s2002/Hostel-Management-System",
   },
+ 
 ]
 
 const categories = ["All", "Full Stack", "Backend", "Frontend"]
