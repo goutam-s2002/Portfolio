@@ -11,7 +11,7 @@ const projects = [
     subtitle: "Personal Finance Management System",
     description:
       "A comprehensive personal finance management system with role-based access control, financial dashboards, and analytics.",
-    techStack: ["Java", "Spring Boot", "JSP", "HTML", "CSS", "JavaScript", "Maven"],
+    techStack: ["Java", "Spring Boot", "JSP", "HTML", "CSS", "JavaScript", "Maven","Bootstrap"],
     features: [
       "Admin, Analyst, User roles",
       "Financial dashboards",
