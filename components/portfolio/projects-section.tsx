@@ -26,7 +26,7 @@ const projects = [
   },
    {
   id: 2, 
-  title: "Secure Digital Banking System",
+  title: "Banking System",
   subtitle: "Full Stack",
   description:
     "A comprehensive digital banking platform featuring secure JWT authentication, multi-account management, instant fund transfers, transaction histories, and dynamic statement exports.",
@@ -51,6 +51,7 @@ const projects = [
   category: "Full Stack",
   url: "https://github.com/goutam-s2002/Banking-System-Backend", 
   url2: "https://bankingsystems.netlify.app" 
+},
 
   {
     id: 3,
