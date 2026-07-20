@@ -22,6 +22,7 @@ const projects = [
     color: "bg-primary",
     category: "Full Stack",
     url: "https://github.com/goutam-s2002/FinanceBuddy",
+    url2: "https://financebuddy-4i6l.onrender.com",
   },
   {
     id: 2,
@@ -39,6 +40,7 @@ const projects = [
     color: "bg-accent",
     category: "Full Stack",
     url: "https://github.com/goutam-s2002/Hostel-Management-System",
+    url2: "https://github.com/goutam-s2002/Hostel-Management-System",
   },
 ]
 
@@ -135,7 +137,7 @@ export function ProjectsSection() {
                           className="w-10 h-10 rounded-lg bg-card flex items-center justify-center border-2 border-border brutal-shadow-sm"
                         >
                           <a
-                            href={project.url}
+                            href={project.url2}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
