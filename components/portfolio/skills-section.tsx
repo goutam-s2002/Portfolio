@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code, Database, Wrench, Layout } from "lucide-react"
+import { Code, Database, Wrench, Layout, Cloudy, CloudUpload } from "lucide-react"
 
 const skillCategories = [
   {
@@ -34,7 +34,7 @@ const skillCategories = [
   },
   {
     title: "Deployment",
-    icon: Wrench,
+    icon: CloudUpload,
     color: "bg-primary",
     textColor: "text-foreground",
     skills: ["Netlify", "Render", "Infinityfree", "Vercel"],
