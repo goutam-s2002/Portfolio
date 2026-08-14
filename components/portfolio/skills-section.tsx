@@ -16,21 +16,28 @@ const skillCategories = [
     icon: Code,
     color: "bg-primary",
     textColor: "text-primary-foreground",
-    skills: ["Java", "JSP", "Servlets", "JDBC", "Spring Boot", "REST APIs"],
+    skills: ["Java", "JSP", "Servlets", "JDBC", "Spring Boot", "REST APIs", "PHP"],
   },
   {
     title: "Database",
     icon: Database,
     color: "bg-accent",
     textColor: "text-accent-foreground",
-    skills: ["MySQL"],
+    skills: ["MySQL", "Supabase", "TiDB"],
   },
   {
     title: "Tools",
     icon: Wrench,
     color: "bg-card",
     textColor: "text-foreground",
-    skills: ["Eclipse", "VS Code", "Git", "Maven"],
+    skills: ["Eclipse", "VS Code", "IntelliJ IDEA", "Git", "Maven"],
+  },
+  {
+    title: "Deployment",
+    icon: Wrench,
+    color: "bg-primary",
+    textColor: "text-foreground",
+    skills: ["Netlify", "Render", "Infinityfree", "Vercel"],
   },
 ]
 

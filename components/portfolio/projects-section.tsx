@@ -11,7 +11,7 @@ const projects = [
     subtitle: "Personal Finance Management System",
     description:
       "A comprehensive personal finance management system with role-based access control, financial dashboards, and analytics.",
-    techStack: ["Java", "Spring Boot", "JSP", "HTML", "CSS", "JavaScript", "Maven","Bootstrap"],
+    techStack: ["Java", "Spring Boot", "JSP", "HTML", "CSS", "JavaScript", "Maven", "Bootstrap"],
     features: [
       "Admin, Analyst, User roles",
       "Financial dashboards",
@@ -19,39 +19,39 @@ const projects = [
       "CRUD operations",
       "PDF report generation",
     ],
-    color: "bg-primary",
+    color: "bg-secondary",
     category: "Full Stack",
     url: "https://github.com/goutam-s2002/FinanceBuddy",
     url2: "https://financebuddy-4i6l.onrender.com",
   },
-   {
-  id: 2, 
-  title: "Banking System",
-  subtitle: "Full Stack  Banking & Finance Platform",
-  description:
-    "A comprehensive digital banking platform featuring multi-account management, instant fund transfers, transaction histories, and dynamic statement exports.",
-  techStack: [
-    "React",
-    "Spring Boot",
-    "Spring Security",
-    "JWT",
-    "Spring Data JPA",
-    "MySQL",
-    "Bootstrap",
-    "Docker"
-  ],
-  features: [
-    "Secure JWT auth with silent access token refresh",
-    "Checking & Savings account management",
-    "Instant fund transfers, deposits & withdrawals",
-    "Full bank statements exportable to CSV, Excel, Word & PDF",
-    "Role-based access control (Admin & User portals) with audit logs",
-  ],
-  color: "bg-primary",
-  category: "Full Stack",
-  url: "https://github.com/goutam-s2002/Banking-System-Backend", 
-  url2: "https://bankingsystems.netlify.app" 
-},
+  {
+    id: 2,
+    title: "Banking System",
+    subtitle: "Full Stack  Banking & Finance Platform",
+    description:
+      "A comprehensive digital banking platform featuring multi-account management, instant fund transfers, transaction histories, and dynamic statement exports.",
+    techStack: [
+      "React",
+      "Spring Boot",
+      "Spring Security",
+      "JWT",
+      "Spring Data JPA",
+      "MySQL",
+      "Bootstrap",
+      "Docker"
+    ],
+    features: [
+      "Secure JWT auth with silent access token refresh",
+      "Checking & Savings account management",
+      "Instant fund transfers, deposits & withdrawals",
+      "Full bank statements exportable to CSV, Excel, Word & PDF",
+      "Role-based access control (Admin & User portals) with audit logs",
+    ],
+    color: "bg-primary",
+    category: "Full Stack",
+    url: "https://github.com/goutam-s2002/Banking-System-Backend",
+    url2: "https://bankingsystems.netlify.app"
+  },
 
   {
     id: 3,
@@ -71,7 +71,93 @@ const projects = [
     url: "https://github.com/goutam-s2002/Hostel-Management-System",
     url2: "https://github.com/goutam-s2002/Hostel-Management-System",
   },
- 
+  {
+    id: 4,
+    title: "BookEase",
+    subtitle: "Online Book Store & Inventory Platform",
+    description:
+      "A full-featured online bookstore platform with responsive catalog browsing, persistent shopping cart, direct checkout, printable invoices, and an administrative inventory control dashboard.",
+    techStack: ["PHP", "MySQL", "JavaScript", "CSS3", "Bootstrap Icons", "AJAX", "Apache"],
+    features: [
+      "Responsive catalog & multi-angle book gallery",
+      "Persistent shopping cart & one-click checkout",
+      "Live order tracking & printable invoices",
+      "Admin KPI dashboard & inventory management",
+    ],
+    color: "bg-card",
+    category: "Full Stack",
+    url: "https://github.com/goutam-s2002/Bookease",
+    url2: "http://bookease.great-site.net",
+  },
+  {
+    id: 5,
+    title: "LinkSnap",
+    subtitle: "Personal Digital Vault & Developer Workspace",
+    description:
+      "A self-hosted, private digital vault designed to organize, search, and manage personal bookmarks, developer contacts, project portfolios, and code snippets with real-time global search and full JSON data portability.",
+    techStack: ["PHP", "MySQL", "JavaScript", "CSS", "Bootstrap Icons", "PDO", "Apache"],
+    features: [
+      "Global instant search overlay (Ctrl + K) across all vault modules",
+      "Categorized bookmark manager with visit tracking & 1-click clipboard copy",
+      "Project portfolio tracker with status badges & live repository links",
+      "Developer contacts directory & pinned notes/code snippets vault",
+    ],
+    color: "bg-secondary",
+    category: "Full Stack",
+    url: "https://github.com/goutam-s2002/LinkSnap",
+    url2: "https://linksnap.freedev.app",
+  },
+  {
+    id: 6,
+    title: "TaskFlow Pro",
+    subtitle: "Real-Time Collaborative Kanban & Task Management Platform",
+    description:
+      "A high-performance full-stack task and project management system featuring interactive drag-and-drop Kanban boards, live multi-tab WebSocket synchronization, JWT authentication, and distributed cloud database persistence on TiDB Cloud Serverless.",
+    techStack: [
+      "React",
+      "Node.js",
+      "Express",
+      "TiDB Cloud",
+      "WebSockets",
+      "JWT",
+      "Vite"
+    ],
+    features: [
+      "Interactive Kanban board with drag-and-drop workflow status transitions",
+      "Real-time multi-tab & session state synchronization via native WebSockets",
+      "Dual view modes: Seamless toggle between Kanban boards and structured table/list views",
+      "Secure JWT authentication with bcrypt hashing & live KPI metrics dashboard",
+    ],
+    color: "bg-primary",
+    category: "Full Stack",
+    url: "https://github.com/goutam-s2002/task-management-app",
+    url2: "https://github.com/goutam-s2002/task-management-app",
+  },
+  {
+  id: 7,
+  title: "Voice of India",
+  subtitle: "Dynamic Multi-Country News Aggregator & Discovery Platform",
+  description:
+    "A modern, responsive news aggregation web application built with React, delivering real-time top headlines across diverse categories and global countries with instant light/dark theme switching and dynamic API integration.",
+  techStack: [
+    "React",
+    "JavaScript",
+    "NewsAPI",
+    "CSS",
+    "HTML"
+  ],
+  features: [
+    "Real-time top headline streaming across 7 curated categories (Tech, Business, Sports, Science, etc.)",
+    "Dynamic multi-country filtering supporting India, United States, UK, Australia, France, and Russia",
+    "Seamless Dark & Light mode theme switcher with full body styling transitions",
+    "Fully responsive mobile-first layout with smooth slide-out drawer sidebar navigation"
+  ],
+  color: "bg-primary",
+  category: "Frontend",
+  url: "https://github.com/goutam-s2002/Voice-of-India",
+  url2: "https://goutam-s2002.github.io/Voice-of-India"
+},
+
 ]
 
 const categories = ["All", "Full Stack", "Backend", "Frontend"]
@@ -171,9 +257,9 @@ export function ProjectsSection() {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                             <ExternalLink size={18} className="text-foreground" />
+                            <ExternalLink size={18} className="text-foreground" />
                           </a>
-                         
+
                         </motion.button>
                       </div>
                     </div>
