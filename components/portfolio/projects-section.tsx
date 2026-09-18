@@ -1,10 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ExternalLink, Github, Layers, ChevronRight } from "lucide-react"
+import { Project } from "@/lib/types"
 
-const projects = [
+const defaultProjects: Project[] = [
   {
     id: 1,
     title: "FinanceBuddy",
@@ -160,16 +161,42 @@ const projects = [
 
 ]
 
-const categories = ["All", "Full Stack", "Backend", "Frontend"]
+interface ProjectsSectionProps {
+  initialProjects?: Project[]
+}
 
-export function ProjectsSection() {
+export function ProjectsSection({ initialProjects }: ProjectsSectionProps) {
+  const [projectList, setProjectList] = useState<Project[]>(
+    initialProjects && initialProjects.length > 0 ? initialProjects : defaultProjects
+  )
   const [activeCategory, setActiveCategory] = useState("All")
-  const [expandedProject, setExpandedProject] = useState<number | null>(null)
+  const [expandedProject, setExpandedProject] = useState<string | number | null>(null)
+
+  useEffect(() => {
+    if (initialProjects && initialProjects.length > 0) {
+      setProjectList(initialProjects)
+      return
+    }
+
+    fetch("/api/portfolio")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.projects && Array.isArray(data.projects) && data.projects.length > 0) {
+          setProjectList(data.projects)
+        }
+      })
+      .catch(() => {})
+  }, [initialProjects])
+
+  const categories = [
+    "All",
+    ...Array.from(new Set(projectList.map((p) => p.category).filter(Boolean))),
+  ]
 
   const filteredProjects =
     activeCategory === "All"
-      ? projects
-      : projects.filter((p) => p.category === activeCategory)
+      ? projectList
+      : projectList.filter((p) => p.category === activeCategory)
 
   return (
     <section id="projects" className="py-20 px-4 bg-muted/30">

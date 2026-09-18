@@ -12,13 +12,16 @@ import {
   User,
   MessageSquare,
   Instagram,
+  RefreshCw,
 } from "lucide-react"
+import { toast } from "sonner"
+import { WhatsAppIcon } from "@/components/ui/whatsapp-icon"
 
 const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "goutam.soni.00112@info.com",
+    value: "goutam.soni.00112@gmail.com",
     href: "mailto:goutam.soni.00112@gmail.com",
   },
   {
@@ -26,6 +29,12 @@ const contactInfo = [
     label: "Phone",
     value: "+91 8839810406",
     href: "tel:+918839810406",
+  },
+  {
+    icon: WhatsAppIcon,
+    label: "WhatsApp",
+    value: "+91 8839810406",
+    href: "https://wa.me/918839810406?text=Hi%20Goutam,%20I%20saw%20your%20portfolio!",
   },
   {
     icon: MapPin,
@@ -49,6 +58,12 @@ const socialLinks = [
     color: "bg-primary",
   },
   {
+    icon: WhatsAppIcon,
+    label: "WhatsApp",
+    href: "https://wa.me/918839810406?text=Hi%20Goutam,%20I%20saw%20your%20portfolio!",
+    color: "bg-[#25D366] text-white",
+  },
+  {
     icon: Instagram,
     label: "Instagram",
     href: "https://www.instagram.com/goutam_s2002/",
@@ -62,13 +77,59 @@ export function ContactSection() {
     email: "",
     message: "",
   })
+  const [submitting, setSubmitting] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Direct WhatsApp Send
+  const handleDirectWhatsApp = () => {
+    if (!formState.name.trim() || !formState.message.trim()) {
+      toast.error("Please enter your name and message first!")
+      return
+    }
+
+    const text = `Hi Goutam, my name is ${formState.name} (${formState.email || "Email not provided"}).\n\n${formState.message}`
+    const waUrl = `https://wa.me/918839810406?text=${encodeURIComponent(text)}`
+    window.open(waUrl, "_blank")
+    toast.success("Opening WhatsApp chat with Goutam...")
+  }
+
+  // Submit via API & Open WhatsApp
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log(formState)
-    alert("Message sent!")
-    setFormState({ name: "", email: "", message: "" })
+    if (!formState.name.trim() || !formState.email.trim() || !formState.message.trim()) {
+      toast.error("Please fill all fields")
+      return
+    }
+
+    setSubmitting(true)
+    try {
+      // 1. Save to backend / Supabase
+      const res = await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formState),
+      })
+
+      // 2. Open WhatsApp pre-filled message
+      const text = `Hi Goutam, my name is ${formState.name} (${formState.email}).\n\n${formState.message}`
+      const waUrl = `https://wa.me/918839810406?text=${encodeURIComponent(text)}`
+      window.open(waUrl, "_blank")
+
+      if (res.ok) {
+        toast.success("Message recorded & opening WhatsApp!")
+      } else {
+        toast.info("Opening WhatsApp...")
+      }
+
+      setFormState({ name: "", email: "", message: "" })
+    } catch {
+      // Fallback: still open WhatsApp even if network/offline
+      const text = `Hi Goutam, my name is ${formState.name} (${formState.email}).\n\n${formState.message}`
+      const waUrl = `https://wa.me/918839810406?text=${encodeURIComponent(text)}`
+      window.open(waUrl, "_blank")
+      toast.success("Opening WhatsApp chat!")
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -98,36 +159,34 @@ export function ContactSection() {
           >
             <div className="bg-primary rounded-2xl sm:rounded-3xl border-3 sm:border-4 border-border brutal-shadow p-4 sm:p-6 md:p-8">
               <h3 className="text-2xl font-bold text-primary-foreground mb-6">
-                Let&apos;s Connect
+                Let's Build Something Together
               </h3>
-              <p className="text-primary-foreground/80 mb-8 leading-relaxed">
-                I&apos;m always open to discussing new projects, creative ideas, or
-                opportunities to be part of your vision. Feel free to reach out!
+              <p className="text-primary-foreground/80 leading-relaxed mb-8">
+                I'm always open to discussing new projects, creative ideas, or
+                opportunities to be part of your visions. Feel free to contact me
+                via WhatsApp, email, or phone!
               </p>
 
-              {/* Contact Items */}
               <div className="space-y-4">
-                {contactInfo.map((item, index) => {
-                  const Icon = item.icon
+                {contactInfo.map((info) => {
+                  const Icon = info.icon
                   return (
                     <motion.a
-                      key={item.label}
-                      href={item.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
+                      key={info.label}
+                      href={info.href}
+                      target={info.href.startsWith("http") ? "_blank" : undefined}
+                      rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       whileHover={{ x: 5 }}
-                      className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-card rounded-xl border-3 border-border brutal-shadow-sm brutal-hover"
+                      className="flex items-center gap-4 p-4 bg-card rounded-xl border-3 border-border brutal-shadow-sm hover:bg-card/90 transition-colors"
                     >
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary flex items-center justify-center border-2 border-border flex-shrink-0">
-                        <Icon size={18} className="text-primary-foreground sm:w-[22px] sm:h-[22px]" />
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                        <Icon size={22} />
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-muted-foreground">
-                          {item.label}
+                        <p className="text-xs text-muted-foreground font-bold uppercase">
+                          {info.label}
                         </p>
-                        <p className="font-bold text-foreground text-sm sm:text-base break-all">{item.value}</p>
+                        <p className="font-bold text-foreground">{info.value}</p>
                       </div>
                     </motion.a>
                   )
@@ -136,12 +195,12 @@ export function ContactSection() {
             </div>
 
             {/* Social Links */}
-            <div className="bg-card rounded-xl sm:rounded-2xl border-3 sm:border-4 border-border brutal-shadow p-4 sm:p-6">
+            <div className="bg-card rounded-2xl sm:rounded-3xl border-3 sm:border-4 border-border brutal-shadow p-4 sm:p-6 md:p-8">
               <h4 className="text-lg font-bold text-foreground mb-4">
-                Follow Me
+                Connect With Me
               </h4>
-              <div className="flex gap-4">
-                {socialLinks.map((social, index) => {
+              <div className="flex flex-wrap gap-3">
+                {socialLinks.map((social) => {
                   const Icon = social.icon
                   return (
                     <motion.a
@@ -149,15 +208,12 @@ export function ContactSection() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
-                      className={`w-14 h-14 ${social.color} rounded-xl border-3 border-border brutal-shadow-sm flex items-center justify-center brutal-hover`}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`flex items-center gap-2 px-4 py-3 rounded-xl border-3 border-border brutal-shadow-sm ${social.color} font-bold text-sm brutal-hover`}
                     >
-                      <Icon size={24} className={social.color === "bg-primary" ? "text-primary-foreground" : "text-foreground"} />
+                      <Icon size={18} />
+                      {social.label}
                     </motion.a>
                   )
                 })}
@@ -175,9 +231,12 @@ export function ContactSection() {
               onSubmit={handleSubmit}
               className="bg-card rounded-2xl sm:rounded-3xl border-3 sm:border-4 border-border brutal-shadow p-4 sm:p-6 md:p-8"
             >
-              <h3 className="text-2xl font-bold text-foreground mb-6">
-                Send a Message
-              </h3>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold text-foreground">
+                  Send a Message
+                </h3>
+                
+              </div>
 
               <div className="space-y-6">
                 {/* Name Input */}
@@ -196,7 +255,7 @@ export function ContactSection() {
                       onChange={(e) =>
                         setFormState({ ...formState, name: e.target.value })
                       }
-                      placeholder="Name"
+                      placeholder="Your Name"
                       className="w-full pl-12 pr-4 py-4 bg-background rounded-xl border-3 border-border font-medium placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                       required
                     />
@@ -220,7 +279,7 @@ export function ContactSection() {
                       onChange={(e) =>
                         setFormState({ ...formState, email: e.target.value })
                       }
-                      placeholder="xyz@example.com"
+                      placeholder="your.email@example.com"
                       className="w-full pl-12 pr-4 py-4 bg-background rounded-xl border-3 border-border font-medium placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                       required
                     />
@@ -242,7 +301,7 @@ export function ContactSection() {
                       onChange={(e) =>
                         setFormState({ ...formState, message: e.target.value })
                       }
-                      placeholder="Tell me about your project..."
+                      placeholder="Tell me about your project or requirement..."
                       rows={5}
                       className="w-full pl-12 pr-4 py-4 bg-background rounded-xl border-3 border-border font-medium placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none"
                       required
@@ -250,16 +309,41 @@ export function ContactSection() {
                   </div>
                 </div>
 
-                {/* Submit Button */}
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-bold rounded-xl border-3 border-border brutal-shadow brutal-hover brutal-press"
-                >
-                  <Send size={20} />
-                  Send Message
-                </motion.button>
+                {/* Dual Action Buttons */}
+                <div className="space-y-3 pt-2">
+                  {/* Primary WhatsApp Direct Send */}
+                  <motion.button
+                    type="button"
+                    onClick={handleDirectWhatsApp}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-[#25D366] text-white font-bold rounded-xl border-3 border-border brutal-shadow brutal-hover brutal-press"
+                  >
+                    <WhatsAppIcon size={22} />
+                    Open & Chat on WhatsApp Directly
+                  </motion.button>
+
+                  {/* Standard Form Submit */}
+                  <motion.button
+                    type="submit"
+                    disabled={submitting}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-bold rounded-xl border-3 border-border brutal-shadow brutal-hover brutal-press"
+                  >
+                    {submitting ? (
+                      <>
+                        <RefreshCw className="animate-spin" size={20} />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send size={20} />
+                        Send Message
+                      </>
+                    )}
+                  </motion.button>
+                </div>
               </div>
             </form>
           </motion.div>

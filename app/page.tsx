@@ -7,17 +7,24 @@ import { ProjectsSection } from "@/components/portfolio/projects-section"
 import { ContactSection } from "@/components/portfolio/contact-section"
 import { Footer } from "@/components/portfolio/footer"
 import { FloatingSocials } from "@/components/portfolio/floating-socials"
+import { FloatingWhatsApp } from "@/components/portfolio/floating-whatsapp"
+import { getPortfolioData } from "@/lib/data-provider"
 
-export default function Home() {
+export const revalidate = 10 // Revalidate cache every 10 seconds
+
+export default async function Home() {
+  const data = await getPortfolioData().catch(() => null)
+
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
       <FloatingSocials />
-      <HeroSection />
+      <FloatingWhatsApp />
+      <HeroSection resumeUrl={data?.resume?.url} />
       <AboutSection />
       <SkillsSection />
       <ExperienceSection />
-      <ProjectsSection />
+      <ProjectsSection initialProjects={data?.projects} />
       <ContactSection />
       <Footer />
     </main>

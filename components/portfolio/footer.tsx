@@ -1,7 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Heart, ArrowUp } from "lucide-react"
+import { Heart, ArrowUp, Lock } from "lucide-react"
+import Link from "next/link"
 
 export function Footer() {
   const scrollToTop = () => {
@@ -35,15 +36,25 @@ export function Footer() {
             © {new Date().getFullYear()} All Rights Reserved
           </motion.p>
 
-          {/* Back to Top */}
-          <motion.button
-            onClick={scrollToTop}
-            whileHover={{ scale: 1.1, y: -3 }}
-            whileTap={{ scale: 0.9 }}
-            className="w-12 h-12 bg-primary rounded-xl border-3 border-border brutal-shadow-sm flex items-center justify-center brutal-hover brutal-press"
-          >
-            <ArrowUp size={20} className="text-primary-foreground" />
-          </motion.button>
+          {/* Actions: Admin & Back to Top */}
+          <div className="flex items-center gap-2">
+            <Link
+              href="/admin"
+              title="Admin Portal"
+              className="w-12 h-12 bg-secondary rounded-xl border-3 border-border brutal-shadow-sm flex items-center justify-center brutal-hover brutal-press text-secondary-foreground"
+            >
+              <Lock size={18} />
+            </Link>
+            <motion.button
+              onClick={scrollToTop}
+              whileHover={{ scale: 1.1, y: -3 }}
+              whileTap={{ scale: 0.9 }}
+              title="Back to Top"
+              className="w-12 h-12 bg-primary rounded-xl border-3 border-border brutal-shadow-sm flex items-center justify-center brutal-hover brutal-press"
+            >
+              <ArrowUp size={20} className="text-primary-foreground" />
+            </motion.button>
+          </div>
         </div>
       </div>
     </footer>

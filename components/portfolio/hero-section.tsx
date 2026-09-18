@@ -12,10 +12,28 @@ const titles = [
   "Software Engineer",
 ]
 
-export function HeroSection() {
+export function HeroSection({ resumeUrl }: { resumeUrl?: string }) {
+  const [activeResumeUrl, setActiveResumeUrl] = useState(
+    resumeUrl || "/resume/goutam-soni-resume.pdf"
+  )
   const [titleIndex, setTitleIndex] = useState(0)
   const [displayText, setDisplayText] = useState("")
   const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    if (resumeUrl) {
+      setActiveResumeUrl(resumeUrl)
+      return
+    }
+    fetch("/api/portfolio")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.resume?.url) {
+          setActiveResumeUrl(data.resume.url)
+        }
+      })
+      .catch(() => {})
+  }, [resumeUrl])
 
   useEffect(() => {
     const currentTitle = titles[titleIndex]
@@ -101,8 +119,10 @@ export function HeroSection() {
               className="flex flex-wrap gap-4"
             >
               <motion.a
-                href="/resume/goutam-soni-resume.pdf"
-                download
+                href="/api/resume/download"
+                download="Goutam_Soni_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-bold rounded-xl border-3 border-border brutal-shadow brutal-hover brutal-press"

@@ -3,10 +3,12 @@
 import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Github, Linkedin, Mail } from "lucide-react"
+import { WhatsAppIcon } from "@/components/ui/whatsapp-icon"
 
 const socialIcons = [
   { icon: Github, href: "https://github.com/goutam-s2002", label: "GitHub" },
   { icon: Linkedin, href: "https://www.linkedin.com/in/goutam-soni-a38386290", label: "LinkedIn" },
+  { icon: WhatsAppIcon, href: "https://wa.me/918839810406?text=Hi%20Goutam,%20I%20saw%20your%20portfolio!", label: "WhatsApp" },
   { icon: Mail, href: "mailto:goutam.soni.00112@gmail.com", label: "Email" },
 ]
 
@@ -46,7 +48,7 @@ export function FloatingSocials() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -40 }}
           transition={{ duration: 0.3 }}
-          className="fixed left-4 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-4"
+          className="fixed left-2 sm:left-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 sm:gap-4"
         >
           {socialIcons.map((social, index) => {
             const Icon = social.icon
@@ -62,9 +64,9 @@ export function FloatingSocials() {
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 0.9 }}
-                className="w-12 h-12 bg-card border-3 border-border rounded-xl brutal-shadow-sm flex items-center justify-center"
+                className="w-10 h-10 sm:w-12 sm:h-12 bg-card border-2 sm:border-3 border-border rounded-xl brutal-shadow-sm flex items-center justify-center text-foreground hover:text-primary transition-colors"
               >
-                <Icon size={20} />
+                <Icon size={18} className="sm:w-5 sm:h-5" />
               </motion.a>
             )
           })}
